@@ -434,7 +434,6 @@ ScreenAction Scene::update(sf::Time elapsed)
     ss1 << getPlayerTile();
     auto posText = fmt::format("P({}) T({})", ss1.str(), elapsed.asSeconds());
     _debugWindow.setText(posText);
-
     return Screen::timestep();
 }
 
