@@ -1,6 +1,8 @@
 #pragma once
 #include <functional>
 
+#include <boost/signals2.hpp>
+
 #include <SFML/Graphics.hpp>
 
 #include "GameTypes.h"
@@ -14,8 +16,6 @@ using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
 
 class AnimatedSprite;
 using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
-
-using AnimeCallback = std::function<sf::Vector2f(void)>;
 
 class AnimatedSprite :
     public sf::Drawable,
@@ -49,11 +49,11 @@ public:
     
     sf::RectangleShape& highlight() { return _highlight; }
 
-    void setAnimeCallback(AnimeCallback cb) { _animeCallback = cb; }
-
     sf::FloatRect getGlobalBounds() const;
 
     std::uint16_t timestep() override;
+
+    boost::signals2::signal<void(void)> onUpdate;
 
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
@@ -69,8 +69,6 @@ protected:
     // so this allows us to adjust how many frames get
     // animated in a particular row
     std::uint32_t           _maxFramesPerRow = 0;
-
-    AnimeCallback           _animeCallback;
 
     sf::Sprite              _sprite;
     sf::RectangleShape      _highlight;

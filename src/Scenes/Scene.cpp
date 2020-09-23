@@ -338,7 +338,7 @@ void Scene::enter()
         static_cast<std::uint32_t>(_playerAvatarInfo.source.x),
         static_cast<std::uint32_t>(_playerAvatarInfo.source.y));
 
-    _player->setAnimeCallback(
+    _player->onUpdate.connect(
         [this]()
         {
             return this->animeCallback();
@@ -375,6 +375,7 @@ void Scene::exit()
 {
     _logger->debug("exiting scene '{}'", _name);
     assert(_player);
+
     tt::CallLuaFunction(_luaState, _callbackNames.onExit, _name, 
         { { LUA_REGISTRYINDEX, _luaIdx } });
 
