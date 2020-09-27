@@ -1,9 +1,20 @@
 #include <iostream>
 
 #include "AnimatedSprite.h"
+#include "TTUtils.h"
+
+namespace nl = nlohmann;
 
 namespace tt
 {
+
+void from_json(const nl::json& j, AnimatedSprite& i)
+{
+    if (j.contains("size"))
+    {
+        i._size = j["size"].get<sf::Vector2i>();
+    }
+}
 
 AnimatedSprite::AnimatedSprite(const sf::Texture& texture, const sf::Vector2i& size)
     :   _size{ size }

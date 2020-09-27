@@ -8,9 +8,45 @@ These items are in a **rough order** in which I would like to tackle them.
 
 <hr/>
 
-## Configurable Animation
+## Combat System
+
+The combat system will introduce NPCs and weapons into the game giving players a way to win money from fighting NPCs or possibly die. This feature will be implemented in the following stages:
+
+### Configurable Animation
 
 Currently only the `Player` and `Vehicle` objects supported animation in a convoluted manner. This functionality should be refactored to allow for configurable animated states of all kinds of objects.
+
+An example configuration for the player object might look like:
+
+```json
+{
+    "texture": "textures/tommy.png",
+    "size": { "x": 64, "y": 64 },
+    "states":
+    [
+        { "id": "walking-up", "x": 0, "y": 0, "count": 9 },
+        { "id": "walking-left", "x": 0, "y": 1, "count": 9  },
+        { "id": "walking-down", "x": 0, "y": 2, "count": 9  },
+        { "id": "walking-right", "x": 0, "y": 3, "count": 9  }
+    ]
+}
+```
+
+### Configurable Bounds Checking
+
+Collision bounds need to be seperated from sprite bounds in a sprite sheet. These bounds will be configurable with an offset relative to the state's rectangle, and with a rectangle representing the size of the bounds rectangle.
+
+### Stationary NPCs
+
+NPCs will be animated but in a stationary tile. Players will be able to interact with them and their states will change accordingly.
+
+### Roaming NPCs
+
+NPCs will roam the map much like vehicles currently do. They will also be able to chase the player or run from the player. 
+
+### Combative NPCs
+
+NPCs will have combative state. They will be capable of fighting the player or each other. This will also introduce weapons into the game.
 
 <hr/>
 
@@ -18,17 +54,11 @@ Currently only the `Player` and `Vehicle` objects supported animation in a convo
 
 The system to play audio needs to be abstracted away from the SFML implementation. This will allow for things like log decoration, and a null audio system.
 
-<hr/>
-
-## Mac Installer
-
-Like the Windows installer, Mac installers should be automatically deployed with pushes to master.
-
 <hr>
 
-## Dynamic Bounds Checking
+## Auto-Detect Collision Bounds
 
-Collision bounds need to be seperated from sprite bounds in a sprite sheet.
+Logic should be added that scans the four directions of an image for the extent of its bounds. This would make it easier to add textures and give more precise collision detection.
 
 <hr/>
 
@@ -38,9 +68,12 @@ Need to a define a mission API.
 
 <hr/>
 
+
 ## Integrate GUI Library
 
 Explore GUI/Widget libraries that support SFLM. This will be useful for things like a Settings page where widgets (e.g. checkboxes, dropdowns) would be useful.
+
+<hr/>
 
 ## Migrate to Github Actions
 

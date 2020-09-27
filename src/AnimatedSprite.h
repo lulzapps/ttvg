@@ -4,9 +4,12 @@
 #include <boost/signals2.hpp>
 
 #include <SFML/Graphics.hpp>
+#include <nlohmann/json.hpp>
 
 #include "GameTypes.h"
 #include "IUpdateable.h"
+
+namespace nl = nlohmann;
 
 namespace tt
 {
@@ -17,6 +20,8 @@ using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
 class AnimatedSprite;
 using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
 
+void from_json(const nl::json& j, AnimatedSprite& i);
+
 class AnimatedSprite :
     public sf::Drawable,
     public sf::Transformable,
@@ -24,6 +29,8 @@ class AnimatedSprite :
 {
 
 public:
+    friend void from_json(const nl::json& j, AnimatedSprite& i);
+
     AnimatedSprite(const sf::Texture& texture, const sf::Vector2i& size);
 
     AnimatedState state() const;
@@ -58,7 +65,7 @@ public:
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
 
-    const sf::Vector2i      _size; // fixed cell size of each frame within the sprite
+    sf::Vector2i      _size; // fixed cell size of each frame within the sprite
 
     AnimatedState           _state = AnimatedState::STILL;
     Direction               _direction = Direction::DOWN;
