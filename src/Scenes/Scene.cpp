@@ -364,8 +364,14 @@ void Scene::enter()
         {
             _hud.setBalance(cash);
         });
+		
+    if (_bgmusic) _bgmusic->play();		
 
-    if (_bgmusic) _bgmusic->play();
+    _player->onUpdate.connect(
+        [this]()
+        {
+            animeCallback();
+        });
 
     tt::CallLuaFunction(_luaState, _callbackNames.onEnter, _name, 
         { { LUA_REGISTRYINDEX, _luaIdx } });
@@ -375,6 +381,10 @@ void Scene::exit()
 {
     _logger->debug("exiting scene '{}'", _name);
     assert(_player);
+     
+    _player->onSetHealth.disconnect_all_slots();
+    _player->onSetCash.disconnect_all_slots();
+    _player->onUpdate.disconnect_all_slots();
 
     tt::CallLuaFunction(_luaState, _callbackNames.onExit, _name, 
         { { LUA_REGISTRYINDEX, _luaIdx } });
