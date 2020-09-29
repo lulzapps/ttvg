@@ -16,6 +16,24 @@ void from_json(const nl::json& j, AnimatedSprite& i)
     }
 }
 
+void from_json(const nl::json& j, AnimatedState2& state)
+{
+    if (j.contains("id"))
+    {
+        j["id"].get_to(state.id);
+    }
+
+    if (j.contains("source"))
+    {
+        state.source = j["source"].get<sf::Vector2i>();
+    }
+
+    if (j.contains("count"))
+    {
+        j["count"].get_to(state.count);
+    }
+}
+
 AnimatedSprite::AnimatedSprite(const sf::Texture& texture, const sf::Vector2i& size)
     :   _size{ size }
 {

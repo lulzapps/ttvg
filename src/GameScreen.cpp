@@ -54,6 +54,8 @@ GameScreen::GameScreen(ResourceManager& resmgr, sf::RenderTarget& target)
     // Would be so nice if lines didn't wrap in source code.
     // I think 80 characters is a fair line size.
     //
+    // I used to get into this debate with a developer at my old job, and I'll ask you what I asked him: who still uses an editor that's only 80 characters wide? What is this, 1992? 80x254lyfe?!
+    //
     _scenes.emplace("DeathCampInterior", 
                     std::make_shared<Scene>("DeathCampInterior", setup));
 

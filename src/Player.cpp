@@ -6,6 +6,10 @@
 namespace tt
 {
 
+void from_json(const nl::json & j, Player & i)
+{
+}
+
 namespace
 {
 
@@ -267,6 +271,5 @@ void Player::setBalance(float c)
     _cash = c;
     onSetCash(_cash);
 }
-
 
 } // namespace tt

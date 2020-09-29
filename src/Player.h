@@ -2,6 +2,8 @@
 
 #include <boost/signals2.hpp>
 
+#include <nlohmann/json.hpp>
+
 #include "AnimatedSprite.h"
 #include "Item.h"
 
@@ -10,6 +12,7 @@ namespace tt
 
 class Player;
 using PlayerPtr = std::shared_ptr<Player>;
+void from_json(const nl::json& j, Player& i);
 
 class Player : public AnimatedSprite
 {

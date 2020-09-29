@@ -16,11 +16,20 @@ namespace tt
 
 class AnimatedSprite;
 using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
-
-class AnimatedSprite;
-using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
-
 void from_json(const nl::json& j, AnimatedSprite& i);
+
+struct AnimatedState2;
+using AnimatedState2Ptr = std::shared_ptr<AnimatedState2>;
+using AnimatedState2Map = std::map<std::string, AnimatedState2>;
+void from_json(const nl::json& j, AnimatedState2& i);
+
+struct AnimatedState2
+{
+    std::string     id;
+    sf::Vector2i    source;
+    std::uint32_t   count;
+};
+
 
 class AnimatedSprite :
     public sf::Drawable,
@@ -39,16 +48,7 @@ public:
     Direction direction() const { return _direction; }
     void setDirection(Direction val) { _direction = val; }
 
-    ///
-    /// \brief Set the current cell to be drawn
-    ///
     void setSource(std::uint32_t x, std::uint32_t y);
-
-    ///
-    /// \brief  Set the max width in terms of cells for a
-    ///         given row. The animation will cycle through
-    ///         this number of cells
-    ///
     void setMaxFramesPerRow(std::uint32_t max);
     
     void setHighlighted(bool h);
@@ -80,6 +80,8 @@ protected:
     sf::Sprite              _sprite;
     sf::RectangleShape      _highlight;
 
+
+    AnimatedState2Map       _states;
 };
 
 } // namespace tt
