@@ -20,7 +20,7 @@ void from_json(const nl::json& j, AnimatedSprite& i);
 
 struct AnimatedState2;
 using AnimatedState2Ptr = std::shared_ptr<AnimatedState2>;
-using AnimatedState2Map = std::map<std::string, AnimatedState2>;
+using AnimatedState2s = std::map<std::string, AnimatedState2Ptr>;
 void from_json(const nl::json& j, AnimatedState2& i);
 
 struct AnimatedState2
@@ -29,7 +29,6 @@ struct AnimatedState2
     sf::Vector2i    source;
     std::uint32_t   count;
 };
-
 
 class AnimatedSprite :
     public sf::Drawable,
@@ -81,7 +80,7 @@ protected:
     sf::RectangleShape      _highlight;
 
 
-    AnimatedState2Map       _states;
+    AnimatedState2s       _states;
 };
 
 } // namespace tt

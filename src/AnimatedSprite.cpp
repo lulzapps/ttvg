@@ -12,8 +12,11 @@ void from_json(const nl::json& j, AnimatedSprite& i)
 {
     if (j.contains("size"))
     {
+
         i._size = j["size"].get<sf::Vector2i>();
     }
+
+    if (j.contains("states"))
 }
 
 void from_json(const nl::json& j, AnimatedState2& state)
