@@ -367,6 +367,8 @@ void Scene::enter()
 		
     if (_bgmusic) _bgmusic->play();		
 
+    if (_bgmusic) _bgmusic->play();
+	
     _player->onUpdate.connect(
         [this]()
         {
@@ -444,6 +446,7 @@ ScreenAction Scene::update(sf::Time elapsed)
     ss1 << getPlayerTile();
     auto posText = fmt::format("P({}) T({})", ss1.str(), elapsed.asSeconds());
     _debugWindow.setText(posText);
+	
     return Screen::timestep();
 }
 
