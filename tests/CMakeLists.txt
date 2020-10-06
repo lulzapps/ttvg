@@ -85,6 +85,9 @@ set(HARNESS_FILES
     ../src/Screen.h
     ../src/Screen.cpp
 
+    ../src/SpriteFactory.h
+    ../src/SpriteFactory.cpp
+
     ../src/TTLua.h
     ../src/TTLua.cpp
 

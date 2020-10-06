@@ -14,6 +14,7 @@ set(SOURCE_FILES
     Player.cpp
     ResourceManager.cpp
     Screen.cpp
+    SpriteFactory.cpp
     TooterLogger.cpp
     Transition.cpp
     TTLua.cpp
@@ -46,6 +47,7 @@ set(HEADER_FILES
     Player.h
     ResourceManager.h
     Screen.h
+    SpriteFactory.h
     Tiles.hpp
     TooterLogger.h
     Transition.h
