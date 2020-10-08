@@ -4,7 +4,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include "AnimatedSprite.h"
+#include "GameObject.h"
 #include "Item.h"
 
 namespace tt
@@ -53,11 +53,15 @@ public:
     void setBalance(float c);
     boost::signals2::signal<void(float cash)> onSetCash;
 
+    bool walking() const;
+    void setWalking(bool v);
+
 private:
     std::vector<ItemPtr>    _inventory;
 
     std::uint32_t           _health = 100;
     float                   _cash = 40.0f;
+    bool                    _walking = false;
 
 };
 

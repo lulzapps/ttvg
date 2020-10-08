@@ -85,7 +85,7 @@ Vehicle::Vehicle(const sf::Texture& texture, const sf::Vector2i & size, Backgrou
       _bg { bg }
 {
     setSource(0, 0);
-    setState(AnimatedState::ANIMATED);
+    setAnimated(true);
 }
 
 std::uint16_t Vehicle::timestep()

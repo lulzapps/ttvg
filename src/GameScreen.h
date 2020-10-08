@@ -8,7 +8,7 @@
 #include "Scenes/ModalWindow.h"
 
 #include "Screen.h"
-#include "AnimatedSprite.h"
+#include "GameObject.h"
 #include "Player.h"
 #include "TTLua.h"
 #include "TTUtils.h"

@@ -272,4 +272,14 @@ void Player::setBalance(float c)
     onSetCash(_cash);
 }
 
+bool Player::walking() const 
+{ 
+    return _walking; 
+}
+
+void Player::setWalking(bool walking) 
+{ 
+    _walking = walking;
+}
+
 } // namespace tt

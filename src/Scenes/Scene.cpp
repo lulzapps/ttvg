@@ -406,13 +406,14 @@ PollResult Scene::poll(const sf::Event& e)
         return result;
     }
 
-    if (_player->state() == AnimatedState::ANIMATED
+    if (_player->walking()
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        _player->setState(AnimatedState::STILL);
+        _player->setWalking(false);
+        _player->setAnimated(false);
     }
 
     return {};
@@ -819,56 +820,65 @@ PollResult Scene::privatePollHandler(const sf::Event& e)
 
             case sf::Keyboard::Left:
             {
-                if (_player->state() == AnimatedState::ANIMATED
+                if (_player->walking()
                     && _player->direction() == Direction::LEFT)
                 {
                     return { true, {} };
                 }
 
+                _player->setWalking(true);
+                _player->setAnimated(true);
+
+                // THIS WILL EVENTUALLY BE "SET STATE"
                 _player->setSource(0, 1);
-                _player->setState(AnimatedState::ANIMATED);
                 _player->setDirection(Direction::LEFT);
                 return { true, {} };
             }
 
             case sf::Keyboard::Right:
             {
-                if (_player->state() == AnimatedState::ANIMATED
+                if (_player->walking()
                     && _player->direction() == Direction::RIGHT)
                 {
                     return { true, {} };
                 }
 
+                _player->setWalking(true);
+                _player->setAnimated(true);
+
                 _player->setSource(0, 3);
-                _player->setState(AnimatedState::ANIMATED);
                 _player->setDirection(Direction::RIGHT);
                 return { true, {} };
             }
 
             case sf::Keyboard::Up:
             {
-                if ((_player->state() == AnimatedState::ANIMATED && _player->direction() == Direction::UP)
+                if ((_player->walking() && _player->direction() == Direction::UP)
                     || (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
                 {
                     return { true, {} };
                 }
 
+                _player->setWalking(true);
+                _player->setAnimated(true);
+
                 _player->setSource(0, 0);
-                _player->setState(AnimatedState::ANIMATED);
                 _player->setDirection(Direction::UP);
                 return { true, {} };
             }
 
             case sf::Keyboard::Down:
             {
-                if ((_player->state() == AnimatedState::ANIMATED && _player->direction() == Direction::DOWN)
+                if ((_player->walking() && _player->direction() == Direction::DOWN)
                     || (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
                 {
                     return { true, {} };
                 }
 
+                _player->setWalking(true);
+                _player->setAnimated(true);
+
                 _player->setSource(0, 2);
-                _player->setState(AnimatedState::ANIMATED);
                 _player->setDirection(Direction::DOWN);
                 return { true, {} };
             }

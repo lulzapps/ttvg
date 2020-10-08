@@ -20,8 +20,8 @@ function(create_test testname FILES)
 endfunction(create_test)
 
 set(PROJECT_FILES
-    ../src/AnimatedSprite.h    
-    ../src/AnimatedSprite.cpp
+    ../src/GameObject.h    
+    ../src/GameObject.cpp
     
     ../src/Background.h
     ../src/Background.cpp

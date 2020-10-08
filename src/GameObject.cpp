@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "AnimatedSprite.h"
+#include "GameObject.h"
 #include "TTUtils.h"
 
 namespace nl = nlohmann;
@@ -56,25 +56,14 @@ void GameObject::setSource(std::uint32_t x, std::uint32_t y)
         _source.x * _size.x, _source.y * _size.y, _size.x, _size.y));
 }
 
-void GameObject::setState(AnimatedState state)
-{
-    _state = state;
-    _timer.restart();
-}
-
 void GameObject::setMaxFramesPerRow(std::uint32_t max)
 {
     _maxFramesPerRow = max;
 }
 
-AnimatedState GameObject::state() const
-{
-    return _state;
-}
-
 std::uint16_t GameObject::timestep()
 {
-    if (AnimatedState::ANIMATED == _state
+    if (animated()
         && _timer.getElapsedTime().asMilliseconds() > 65)
     {
         auto[left, top] = _source;

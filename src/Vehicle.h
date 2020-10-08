@@ -6,7 +6,7 @@
 
 #include "GameTypes.h"
 #include "Path.hpp"
-#include "AnimatedSprite.h"
+#include "GameObject.h"
 #include "Intersection.h"
 #include "Tiles.hpp"
 

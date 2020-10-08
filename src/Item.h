@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <nlohmann/json.hpp>
 
-#include "AnimatedSprite.h"
+#include "GameObject.h"
 
 namespace nl = nlohmann;
 

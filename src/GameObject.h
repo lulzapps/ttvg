@@ -41,14 +41,13 @@ public:
 
     GameObject(const sf::Texture& texture, const sf::Vector2i& size);
 
-    AnimatedState state() const;
-    void setState(AnimatedState state);
-
+    // TO BE REFACTORED OUT
     Direction direction() const { return _direction; }
     void setDirection(Direction val) { _direction = val; }
 
     void setSource(std::uint32_t x, std::uint32_t y);
     void setMaxFramesPerRow(std::uint32_t max);
+    // END TO BE REFACTORED OUT
     
     void setHighlighted(bool h);
     bool highlighted() const { return _highlight.getSize().x != 0; }
@@ -61,12 +60,18 @@ public:
 
     boost::signals2::signal<void(void)> onUpdate;
 
+    bool animated() const { return _animated; }
+    void setAnimated(bool v) 
+    { 
+        _animated = v;
+        _timer.restart();
+    }
+
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
 
     sf::Vector2i      _size; // fixed cell size of each frame within the sprite
 
-    AnimatedState           _state = AnimatedState::STILL;
     Direction               _direction = Direction::DOWN;
     sf::Vector2i            _source;
     sf::Clock               _timer;
@@ -81,6 +86,8 @@ protected:
 
 
     AnimatedState2s       _states;
+
+    bool                    _animated = false;
 };
 
 } // namespace tt
