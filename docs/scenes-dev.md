@@ -169,19 +169,19 @@ Items can have default settings that apply to each instance of the item in the s
 {
     "handcuffs": 
     {
-        "onPickup": "handcuff_pickup",
+        "onSelect": "handcuff_pickup",
         "instances":
         [    
             { "x": "random", "y": "random" },
             { "x": "random", "y": "random" },
             { "x": "random", "y": "random" },
-            { "x": 24, "y": 32, "onPickup": "special_handcuffs" }
+            { "x": 24, "y": 32, "onSelect": "special_handcuffs" }
         ]
     }
 }
 ```
 
-In the above example, each instance of `handcuffs` will call `handcuff_pickup` in the Lua system when the item is picked up by the player, except for the last instance which will instead call `special_handcuffs`. A specific instance can also override the callback to a null action by doing `"onPickup": ""`.
+In the above example, each instance of `handcuffs` will call `handcuff_pickup` in the Lua system when the item is picked up by the player, except for the last instance which will instead call `special_handcuffs`. A specific instance can also override the callback to a null action by doing `"onSelect": ""`.
 
 ### Randomizing Item Location
 

@@ -403,7 +403,7 @@ BOOST_AUTO_TEST_CASE(itemPickUpTest)
         {
             "instances":
             [    
-                { "x": 5, "y": 5, "onPickUp": "sax_onPickup" }
+                { "x": 5, "y": 5, "onSelect": "sax_onSelect" }
             ]
         }
     }
@@ -411,7 +411,7 @@ BOOST_AUTO_TEST_CASE(itemPickUpTest)
 )lua");
 
     writeFile((luapath / "scene1.lua").string(), R"lua(
-function sax_onPickup(scene, item)
+function sax_onSelect(scene, item)
     local player = scene:getPlayer()
     player:addItem(item)
     scene:removeItem(item)
@@ -438,7 +438,7 @@ end
     auto sax = scene->items().front();
     void* saxPtr = static_cast<void*>(sax.get());
 
-    tt::CallLuaFunction(L, "sax_onPickup", "scene1",
+    tt::CallLuaFunction(L, "sax_onSelect", "scene1",
         { 
             { LUA_REGISTRYINDEX, scene->luaIdx() },
             { LUA_TLIGHTUSERDATA, static_cast<void*>(&sax) } 

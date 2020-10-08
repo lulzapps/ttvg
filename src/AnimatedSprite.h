@@ -14,9 +14,9 @@ namespace nl = nlohmann;
 namespace tt
 {
 
-class AnimatedSprite;
-using AnimatedSpritePtr = std::shared_ptr<AnimatedSprite>;
-void from_json(const nl::json& j, AnimatedSprite& i);
+class GameObject;
+using GameObjectPtr = std::shared_ptr<GameObject>;
+void from_json(const nl::json& j, GameObject& i);
 
 struct AnimatedState2;
 using AnimatedState2Ptr = std::shared_ptr<AnimatedState2>;
@@ -30,16 +30,16 @@ struct AnimatedState2
     std::uint32_t   count;
 };
 
-class AnimatedSprite :
+class GameObject :
     public sf::Drawable,
     public sf::Transformable,
     public IUpdateable
 {
 
 public:
-    friend void from_json(const nl::json& j, AnimatedSprite& i);
+    friend void from_json(const nl::json& j, GameObject& i);
 
-    AnimatedSprite(const sf::Texture& texture, const sf::Vector2i& size);
+    GameObject(const sf::Texture& texture, const sf::Vector2i& size);
 
     AnimatedState state() const;
     void setState(AnimatedState state);

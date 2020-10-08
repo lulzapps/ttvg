@@ -10,9 +10,9 @@ namespace tt
 
 void from_json(const nl::json& j, ItemCallbacks& i)
 {
-    if (j.contains("onPickup")) 
+    if (j.contains("onSelect")) 
     {
-        i.onPickup = j["onPickup"].get<std::string>();
+        i.onSelect = j["onSelect"].get<std::string>();
     }
 
     // if (j.contains("onDrop")) 
@@ -147,7 +147,7 @@ const struct luaL_Reg Item::LuaMethods[] =
 Item::Item( const std::string&  id,
             const sf::Texture& texture,
             const sf::Vector2i& size )
-    : AnimatedSprite(texture, size),
+    : GameObject(texture, size),
         _id { id }
 {
 }

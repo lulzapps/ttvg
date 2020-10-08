@@ -14,13 +14,13 @@ class Player;
 using PlayerPtr = std::shared_ptr<Player>;
 void from_json(const nl::json& j, Player& i);
 
-class Player : public AnimatedSprite
+class Player : public GameObject
 {
 public:
     static constexpr auto CLASS_NAME = "Player";
     static const struct luaL_Reg LuaMethods[];
 
-    using AnimatedSprite::AnimatedSprite;
+    using GameObject::GameObject;
 
     sf::Vector2f getGlobalCenter() const;
 

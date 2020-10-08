@@ -19,7 +19,7 @@ using BackgroundSharedPtr = std::shared_ptr<Background>;
 class Vehicle;
 using VehiclePtr = std::shared_ptr<Vehicle>;
 
-class Vehicle : public AnimatedSprite
+class Vehicle : public GameObject
 {
 
 public:

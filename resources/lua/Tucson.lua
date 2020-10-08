@@ -4,7 +4,7 @@ function onEnter(scene)
     _player = scene:getPlayer()
 end 
 
-function treasureChest_onPickup(scene, item)
+function treasureChest_onSelect(scene, item)
     local w = scene:createModal(ModalType.Default)
     
     if _player:hasItemByName("key") then

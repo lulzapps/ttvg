@@ -8,7 +8,7 @@ namespace nl = nlohmann;
 namespace tt
 {
 
-void from_json(const nl::json& j, AnimatedSprite& i)
+void from_json(const nl::json& j, GameObject& i)
 {
     if (j.contains("size"))
     {
@@ -37,7 +37,7 @@ void from_json(const nl::json& j, AnimatedState2& state)
     }
 }
 
-AnimatedSprite::AnimatedSprite(const sf::Texture& texture, const sf::Vector2i& size)
+GameObject::GameObject(const sf::Texture& texture, const sf::Vector2i& size)
     :   _size{ size }
 {
     _sprite.setTexture(texture);
@@ -48,7 +48,7 @@ AnimatedSprite::AnimatedSprite(const sf::Texture& texture, const sf::Vector2i& s
     _highlight.setOutlineColor(sf::Color(255, 255, 255));
 }
 
-void AnimatedSprite::setSource(std::uint32_t x, std::uint32_t y)
+void GameObject::setSource(std::uint32_t x, std::uint32_t y)
 {
     _source.x = x;
     _source.y = y;
@@ -56,23 +56,23 @@ void AnimatedSprite::setSource(std::uint32_t x, std::uint32_t y)
         _source.x * _size.x, _source.y * _size.y, _size.x, _size.y));
 }
 
-void AnimatedSprite::setState(AnimatedState state)
+void GameObject::setState(AnimatedState state)
 {
     _state = state;
     _timer.restart();
 }
 
-void AnimatedSprite::setMaxFramesPerRow(std::uint32_t max)
+void GameObject::setMaxFramesPerRow(std::uint32_t max)
 {
     _maxFramesPerRow = max;
 }
 
-AnimatedState AnimatedSprite::state() const
+AnimatedState GameObject::state() const
 {
     return _state;
 }
 
-std::uint16_t AnimatedSprite::timestep()
+std::uint16_t GameObject::timestep()
 {
     if (AnimatedState::ANIMATED == _state
         && _timer.getElapsedTime().asMilliseconds() > 65)
@@ -99,7 +99,7 @@ std::uint16_t AnimatedSprite::timestep()
     return 0;
 }
 
-sf::FloatRect AnimatedSprite::getGlobalBounds() const
+sf::FloatRect GameObject::getGlobalBounds() const
 {
     const auto textureRect = _sprite.getTextureRect();
     float width = static_cast<float>(std::abs(textureRect.width));
@@ -107,7 +107,7 @@ sf::FloatRect AnimatedSprite::getGlobalBounds() const
     return getTransform().transformRect(sf::FloatRect(0.f, 0.f, width, height));
 }
 
-void AnimatedSprite::setHighlighted(bool h)
+void GameObject::setHighlighted(bool h)
 {
     if (h)
     {
@@ -122,7 +122,7 @@ void AnimatedSprite::setHighlighted(bool h)
 
 }
 
-void AnimatedSprite::draw(sf::RenderTarget & target, sf::RenderStates states) const
+void GameObject::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
     target.draw(_sprite, states);

@@ -220,7 +220,7 @@
         {
             "instances":
             [    
-                { "x": 126, "y": 21, "onPickup": "sevan_select" }
+                { "x": 126, "y": 21, "onSelect": "sevan_select" }
             ]
         },
         
@@ -320,7 +320,7 @@
                 { 
                     "x": 37, 
                     "y": 31, 
-                    "onPickup": "treasureChest_onPickup" 
+                    "onSelect": "treasureChest_onSelect" 
                 }
             ]
         },

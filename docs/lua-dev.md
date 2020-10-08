@@ -296,7 +296,7 @@ For example:
 "treasure-chest":
 [
     { 
-        "x": 37, "y": 31, "onPickup": "treasureChest_onPickup" 
+        "x": 37, "y": 31, "onSelect": "treasureChest_onSelect" 
     }
 ],
 ```
@@ -305,14 +305,14 @@ These are the item events:
 
 <hr/>
 
-### `[bool] onPickup(scene, item)`
+### `[bool] onSelect(scene, item)`
 
 `scene` is the current scene, and `item` is the item object being picked up. Returns `true` if the player was successful in picking up the item, returns `false` if the player was unsuccessful and the item is to remain in the scene. **The return value overrides the `isObtainable` attribute of the item.**
 
 For example:
 
 ```lua
-function treasureChest_onPickup(scene, item)
+function treasureChest_onSelect(scene, item)
     if _player:hasItemByName("key") then
         local vagina = ItemFactory.createItem("magic-space-vagina")
         _player:addItem(vagina)

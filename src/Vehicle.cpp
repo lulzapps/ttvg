@@ -81,7 +81,7 @@ bool shouldTurn(const sf::Vector2f pathpoint, const sf::Vector2f& current, Direc
 }
 
 Vehicle::Vehicle(const sf::Texture& texture, const sf::Vector2i & size, BackgroundSharedPtr bg)
-    : AnimatedSprite(texture, size),
+    : GameObject(texture, size),
       _bg { bg }
 {
     setSource(0, 0);
@@ -90,7 +90,7 @@ Vehicle::Vehicle(const sf::Texture& texture, const sf::Vector2i & size, Backgrou
 
 std::uint16_t Vehicle::timestep()
 {
-    AnimatedSprite::timestep();
+    GameObject::timestep();
 
     if (_state == State::MOVING
         && _movementClock.getElapsedTime().asMilliseconds() > 100)

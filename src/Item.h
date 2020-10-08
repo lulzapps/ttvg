@@ -19,12 +19,12 @@ using ItemPtr = std::shared_ptr<Item>;
 // Item callbacks can be null or non-null and empty. 
 // If the callback is null, then it was not defined.
 // If it is empty, then this denotes a configuration
-// like: `"onPickup": ""` which might be used to 
+// like: `"onSelect": ""` which might be used to 
 // override a default action with an empty action
 struct ItemCallbacks
 {
     // used when the item is picked up from the map
-    std::optional<std::string> onPickup;
+    std::optional<std::string> onSelect;
 
     // // used when a weapon is yielded or an instrument
     // // is played
@@ -56,7 +56,7 @@ struct ItemInfo
     ItemCallbacks           callbacks;
 };
 
-class Item : public AnimatedSprite
+class Item : public GameObject
 {
 
 public:

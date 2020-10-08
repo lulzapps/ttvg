@@ -689,8 +689,8 @@ void Scene::setItemInstance(Item& item, const ItemInfo& groupInfo, const ItemInf
     const auto position = _background->getGlobalFromTile(sf::Vector2f(xpos, ypos));
     item.setPosition(position);
 
-    item.callbacks.onPickup = instanceInfo.callbacks.onPickup.has_value() ?
-        instanceInfo.callbacks.onPickup : groupInfo.callbacks.onPickup;
+    item.callbacks.onSelect = instanceInfo.callbacks.onSelect.has_value() ?
+        instanceInfo.callbacks.onSelect : groupInfo.callbacks.onSelect;
 
     // TODO: this feels weird to use the item to get its own 
     // info, but it will do for now
@@ -740,11 +740,11 @@ void Scene::pickupItem(Items::iterator itemIt)
 
     bool removeItem = item->isObtainable();
 
-    if (item->callbacks.onPickup.has_value() 
-        && item->callbacks.onPickup->size() > 0)
+    if (item->callbacks.onSelect.has_value() 
+        && item->callbacks.onSelect->size() > 0)
     {
         const auto results = tt::CallLuaFunction(_luaState, 
-            *(item->callbacks.onPickup), 
+            *(item->callbacks.onSelect), 
             _name, 
             { 
                 { LUA_REGISTRYINDEX, _luaIdx },
