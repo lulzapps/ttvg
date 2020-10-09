@@ -64,7 +64,7 @@ void GameObject::setMaxFramesPerRow(std::uint32_t max)
 std::uint16_t GameObject::timestep()
 {
     if (animated()
-        && _timer.getElapsedTime().asMilliseconds() > 65)
+        && _timer.getElapsedTime().asMilliseconds() > 55)
     {
         auto[left, top] = _source;
         left++;
@@ -79,7 +79,7 @@ std::uint16_t GameObject::timestep()
 
         setSource(left, top);
         
-        onUpdate();
+        onFrameChange();
 
         _timer.restart();
     }

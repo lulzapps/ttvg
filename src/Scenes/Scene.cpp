@@ -338,7 +338,7 @@ void Scene::enter()
         static_cast<std::uint32_t>(_playerAvatarInfo.source.x),
         static_cast<std::uint32_t>(_playerAvatarInfo.source.y));
 
-    _player->onUpdate.connect(
+    _player->onMoveTimer.connect(
         [this]()
         {
             return this->animeCallback();
@@ -366,10 +366,8 @@ void Scene::enter()
         });
 		
     if (_bgmusic) _bgmusic->play();		
-
-    if (_bgmusic) _bgmusic->play();
 	
-    _player->onUpdate.connect(
+    _player->onMoveTimer.connect(
         [this]()
         {
             animeCallback();
@@ -386,7 +384,7 @@ void Scene::exit()
      
     _player->onSetHealth.disconnect_all_slots();
     _player->onSetCash.disconnect_all_slots();
-    _player->onUpdate.disconnect_all_slots();
+    _player->onMoveTimer.disconnect_all_slots();
 
     tt::CallLuaFunction(_luaState, _callbackNames.onExit, _name, 
         { { LUA_REGISTRYINDEX, _luaIdx } });

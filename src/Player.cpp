@@ -274,12 +274,30 @@ void Player::setBalance(float c)
 
 bool Player::walking() const 
 { 
-    return _walking; 
+    return _moving; 
 }
 
 void Player::setWalking(bool walking) 
 { 
-    _walking = walking;
+    _moving = walking;
+    _movingTimer.restart();
+}
+
+std::uint16_t Player::timestep()
+{
+    // handle the base class animation
+    GameObject::timestep();
+
+    // check to see if we're walking and if it's time
+    // to signal
+    if (walking()
+        && _movingTimer.getElapsedTime().asMilliseconds() > 65)
+    {
+        onMoveTimer();
+        _movingTimer.restart();
+    }
+
+    return std::uint16_t();
 }
 
 } // namespace tt

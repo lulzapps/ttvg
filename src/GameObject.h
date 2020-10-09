@@ -54,10 +54,12 @@ public:
 
     std::uint16_t timestep() override;
 
-    boost::signals2::signal<void(void)> onUpdate;
-
     bool animated() const { return _animated; }
     void setAnimated(bool v);
+
+public: // signals
+    
+    boost::signals2::signal<void(void)> onFrameChange;
 
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
@@ -73,7 +75,6 @@ protected:
 
     sf::Sprite          _sprite;
     sf::RectangleShape  _highlight;
-
 
     GameObjectStates    _states;
     bool                _animated = false;

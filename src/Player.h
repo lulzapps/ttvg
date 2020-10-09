@@ -59,12 +59,20 @@ public:
     Direction direction() const { return _direction; }
     void setDirection(Direction val) { _direction = val; }
 
+    std::uint16_t timestep() override;
+
+public: // signals
+
+    boost::signals2::signal<void(void)> onMoveTimer;
+
 private:
     std::vector<ItemPtr>    _inventory;
     Direction               _direction = Direction::DOWN;
     std::uint32_t           _health = 100;
     float                   _cash = 40.0f;
-    bool                    _walking = false;
+
+    sf::Clock               _movingTimer;
+    bool                    _moving = false;
 
 };
 
