@@ -42,9 +42,6 @@ public:
     GameObject(const sf::Texture& texture, const sf::Vector2i& size);
 
     // TO BE REFACTORED OUT
-    Direction direction() const { return _direction; }
-    void setDirection(Direction val) { _direction = val; }
-
     void setSource(std::uint32_t x, std::uint32_t y);
     void setMaxFramesPerRow(std::uint32_t max);
     // END TO BE REFACTORED OUT

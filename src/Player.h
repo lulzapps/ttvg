@@ -56,6 +56,9 @@ public:
     bool walking() const;
     void setWalking(bool v);
 
+    Direction direction() const { return _direction; }
+    void setDirection(Direction val) { _direction = val; }
+
 private:
     std::vector<ItemPtr>    _inventory;
 
