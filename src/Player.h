@@ -61,7 +61,7 @@ public:
 
 private:
     std::vector<ItemPtr>    _inventory;
-
+    Direction               _direction = Direction::DOWN;
     std::uint32_t           _health = 100;
     float                   _cash = 40.0f;
     bool                    _walking = false;

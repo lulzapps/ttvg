@@ -18,12 +18,11 @@ class GameObject;
 using GameObjectPtr = std::shared_ptr<GameObject>;
 void from_json(const nl::json& j, GameObject& i);
 
-struct AnimatedState2;
-using AnimatedState2Ptr = std::shared_ptr<AnimatedState2>;
-using AnimatedState2s = std::map<std::string, AnimatedState2Ptr>;
-void from_json(const nl::json& j, AnimatedState2& i);
+struct GameObjectState;
+using GameObjectStates = std::map<std::string, GameObjectState>;
+void from_json(const nl::json& j, GameObjectState& i);
 
-struct AnimatedState2
+struct GameObjectState
 {
     std::string     id;
     sf::Vector2i    source;
@@ -58,33 +57,26 @@ public:
     boost::signals2::signal<void(void)> onUpdate;
 
     bool animated() const { return _animated; }
-    void setAnimated(bool v) 
-    { 
-        _animated = v;
-        _timer.restart();
-    }
+    void setAnimated(bool v);
 
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
 
-    sf::Vector2i      _size; // fixed cell size of each frame within the sprite
-
-    Direction               _direction = Direction::DOWN;
-    sf::Vector2i            _source;
-    sf::Clock               _timer;
+    sf::Vector2i    _size; // fixed cell size of each frame within the sprite 
+    sf::Clock       _timer;
 
     // some sprite sheets have different frames per row
     // so this allows us to adjust how many frames get
     // animated in a particular row
-    std::uint32_t           _maxFramesPerRow = 0;
+    std::uint32_t   _maxFramesPerRow = 0;
+    sf::Vector2i    _source;
 
-    sf::Sprite              _sprite;
-    sf::RectangleShape      _highlight;
+    sf::Sprite          _sprite;
+    sf::RectangleShape  _highlight;
 
 
-    AnimatedState2s       _states;
-
-    bool                    _animated = false;
+    GameObjectStates    _states;
+    bool                _animated = false;
 };
 
 } // namespace tt

@@ -19,7 +19,7 @@ void from_json(const nl::json& j, GameObject& i)
     //if (j.contains("states"))
 }
 
-void from_json(const nl::json& j, AnimatedState2& state)
+void from_json(const nl::json& j, GameObjectState& state)
 {
     if (j.contains("id"))
     {
@@ -109,6 +109,12 @@ void GameObject::setHighlighted(bool h)
         _highlight.setSize(sf::Vector2f{ 0.f, 0.f });
     }
 
+}
+
+void GameObject::setAnimated(bool v)
+{
+    _animated = v;
+    _timer.restart();
 }
 
 void GameObject::draw(sf::RenderTarget & target, sf::RenderStates states) const
