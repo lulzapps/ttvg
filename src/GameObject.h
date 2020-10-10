@@ -42,7 +42,6 @@ public:
 
     // TO BE REFACTORED OUT
     void setSource(std::uint32_t x, std::uint32_t y);
-    void setMaxFramesPerRow(std::uint32_t max);
     // END TO BE REFACTORED OUT
     
     void setHighlighted(bool h);

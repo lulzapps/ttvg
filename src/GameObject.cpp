@@ -56,11 +56,6 @@ void GameObject::setSource(std::uint32_t x, std::uint32_t y)
         _source.x * _size.x, _source.y * _size.y, _size.x, _size.y));
 }
 
-void GameObject::setMaxFramesPerRow(std::uint32_t max)
-{
-    _maxFramesPerRow = max;
-}
-
 std::uint16_t GameObject::timestep()
 {
     if (animated()
