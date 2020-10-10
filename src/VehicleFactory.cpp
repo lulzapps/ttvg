@@ -44,14 +44,9 @@ void VehicleFactory::loadVehicles(const nl::json& json)
     {
         VehicleInfo info;
 
-        std::string temp = item.value().at("size").get<std::string>();
-        phrase_parse(temp.begin(), temp.end(), VectorFloatParser, x3::ascii::space, info.size);
-
-        temp = item.value().at("scale").get<std::string>();
-        phrase_parse(temp.begin(), temp.end(), VectorFloatParser, x3::ascii::space, info.scale);
-
-        temp = item.value().at("speed").get<std::string>();
-        phrase_parse(temp.begin(), temp.end(), VectorFloatParser, x3::ascii::space, info.speed);
+        info.size = item.value().at("size").get<sf::Vector2f>();
+        info.scale = item.value().at("scale").get<sf::Vector2f>();
+        info.speed = item.value().at("speed").get<sf::Vector2f>();
 
         if (item.value().contains("damage"))
         {

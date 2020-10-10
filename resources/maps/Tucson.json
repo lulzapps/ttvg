@@ -444,20 +444,21 @@
         [
             {
                 "name" : "car1",
-                "size" : "77,41",
-                "tiles": "2,4",
-                "scale": "1.4,1.4",
-                "speed": "8.0,20.0",
+                "size": { "x": 77, "y": 41 },
+                "scale": { "x": 1.4, "y": 1.4 },
+
+                "speed": { "x": 8.0, "y": 20.0 },
                 "horn": "carhorn1",
-                "damage": 5
+                "damage": 10
             },
             {
                 "name" : "car2",
-                "size" : "96,63",
-                "scale": "1.0,1.0",
-                "speed": "10.0,30.0",
+                "size": { "x": 96, "y": 63 },
+                "scale": { "x": 1.0, "y": 1.0 },
+
+                "speed": { "x": 10.0, "y": 40.0 },
                 "horn": "carhorn2",
-                "damage": 10
+                "damage": 15
             }
         ],
         "edges":
