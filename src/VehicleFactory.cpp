@@ -42,7 +42,7 @@ void VehicleFactory::loadVehicles(const nl::json& json)
 
     for (const auto& item : json["vehicles"]["assets"].items())
     {
-        VehicleInfo info;
+        VehicleInfo info{ item.value().get<GameObjectInfo>() };
 
         info.speed = item.value().at("speed").get<sf::Vector2f>();
 
@@ -50,8 +50,6 @@ void VehicleFactory::loadVehicles(const nl::json& json)
         {
             item.value().at("damage").get_to(info.damage);
         }
-
-        info.object = item.value().get<GameObjectInfo>();
 
         const auto soundname = fmt::format("sounds/{}.wav",
             item.value().at("horn").get<std::string>());
