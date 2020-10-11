@@ -19,6 +19,20 @@ using BackgroundSharedPtr = std::shared_ptr<Background>;
 class Vehicle;
 using VehiclePtr = std::shared_ptr<Vehicle>;
 
+struct VehicleInfo
+{
+    sf::Texture*        texture = nullptr;
+    sf::SoundBuffer*    sound = nullptr;
+
+    //sf::Vector2f        size;   
+    //sf::Vector2f        scale;
+
+    sf::Vector2f        speed;  // the car's speed is randomly selected within this range
+    std::uint16_t       damage;
+
+    GameObjectInfo      object;
+};
+
 class Vehicle : public GameObject
 {
 
@@ -35,7 +49,11 @@ public:
         STOPPED
     };
 
+    Vehicle(const VehicleInfo& info, const sf::Texture& texture, BackgroundSharedPtr bg);
+
+    // TODO: THIS CONSTRUCTOR WILL BE DELETED
     Vehicle(const sf::Texture& texture, const sf::Vector2i& size, BackgroundSharedPtr bg);
+
 
     std::uint16_t timestep() override;
     bool isBlocked(const sf::FloatRect& point);

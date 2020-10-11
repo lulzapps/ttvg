@@ -11,3 +11,10 @@ Things to test when merging to master:
 ## Items
 
 * picking up an item
+
+## Functionality
+
+* Treasure Chest
+    * try to open the treasure chest, first time should faile
+    * go retrieve key
+    * try to open again, should work

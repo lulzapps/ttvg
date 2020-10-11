@@ -80,6 +80,20 @@ bool shouldTurn(const sf::Vector2f pathpoint, const sf::Vector2f& current, Direc
     return false;
 }
 
+Vehicle::Vehicle(const VehicleInfo& info, const sf::Texture& texture, BackgroundSharedPtr bg)
+    : GameObject{ info.object, texture },
+      _bg{ bg }
+{
+    if (info.object.scale.has_value())
+    {
+        setScale(*(info.object.scale));
+    }
+
+    // TODO: this will probably be removed
+    setSource(0, 0);
+    setAnimated(true);
+}
+
 Vehicle::Vehicle(const sf::Texture& texture, const sf::Vector2i & size, BackgroundSharedPtr bg)
     : GameObject(texture, size),
       _bg { bg }

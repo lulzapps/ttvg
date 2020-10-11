@@ -291,7 +291,7 @@ std::uint16_t Player::timestep()
     // check to see if we're walking and if it's time
     // to signal
     if (walking()
-        && _movingTimer.getElapsedTime().asMilliseconds() > 65)
+        && _movingTimer.getElapsedTime().asMilliseconds() > 75)
     {
         onMoveTimer();
         _movingTimer.restart();

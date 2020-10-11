@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include <optional>
 
 #include <boost/signals2.hpp>
 
@@ -16,7 +17,9 @@ namespace tt
 
 class GameObject;
 using GameObjectPtr = std::shared_ptr<GameObject>;
-void from_json(const nl::json& j, GameObject& i);
+
+struct GameObjectInfo;
+void from_json(const nl::json& j, GameObjectInfo& i);
 
 struct GameObjectState;
 using GameObjectStates = std::map<std::string, GameObjectState>;
@@ -26,7 +29,20 @@ struct GameObjectState
 {
     std::string     id;
     sf::Vector2i    source;
-    std::uint32_t   count;
+
+    std::optional<std::uint32_t>    count;
+};
+
+struct GameObjectInfo
+{
+    std::string     name;
+    std::string     description;
+
+    std::optional<sf::Vector2i>     size;
+    std::optional<sf::Vector2f>     scale;
+    std::optional<std::uint32_t>    count;
+
+    std::optional<GameObjectStates> states;
 };
 
 class GameObject :
@@ -36,8 +52,8 @@ class GameObject :
 {
 
 public:
-    friend void from_json(const nl::json& j, GameObject& i);
 
+    GameObject(const GameObjectInfo& info, const sf::Texture& texture);
     GameObject(const sf::Texture& texture, const sf::Vector2i& size);
 
     // TO BE REFACTORED OUT

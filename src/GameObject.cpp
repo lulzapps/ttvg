@@ -8,15 +8,37 @@ namespace nl = nlohmann;
 namespace tt
 {
 
-void from_json(const nl::json& j, GameObject& i)
+void from_json(const nl::json& j, GameObjectInfo& i)
 {
+    if (j.contains("name")) j["name"].get_to(i.name);
+    if (j.contains("description")) j["description"].get_to(i.description);
+    
     if (j.contains("size"))
     {
-
-        i._size = j["size"].get<sf::Vector2i>();
+        i.size = j["size"].get<sf::Vector2i>();
     }
 
-    //if (j.contains("states"))
+    if (j.contains("scale"))
+    {
+        i.scale = j["scale"].get<sf::Vector2f>();
+    }
+
+    if (j.contains("count"))
+    {
+        i.count = j["count"].get<std::uint32_t>();
+    }
+
+    if (j.contains("states")
+        && j["states"].is_array())
+    {
+        i.states.emplace();
+
+        for (const auto& item : j["states"].items())
+        {
+            auto state = item.value().get<GameObjectState>();
+            i.states->insert(std::make_pair(item.key(), std::move(state)));
+        }
+    }
 }
 
 void from_json(const nl::json& j, GameObjectState& state)
@@ -33,10 +55,26 @@ void from_json(const nl::json& j, GameObjectState& state)
 
     if (j.contains("count"))
     {
-        j["count"].get_to(state.count);
+        state.count = j["count"].get<std::uint32_t>();
     }
 }
 
+GameObject::GameObject(const GameObjectInfo& info, const sf::Texture& texture)
+{
+    _sprite.setTexture(texture);
+
+    if (info.size.has_value())
+    {
+        _size = *info.size;
+        _sprite.setTextureRect(sf::IntRect(0, 0, _size.x, _size.y));
+    }
+
+    _highlight.setFillColor(sf::Color::Transparent);
+    _highlight.setOutlineThickness(2);
+    _highlight.setOutlineColor(sf::Color(255, 255, 255));
+}
+
+// TODO: THIS CONSTRUCTOR WILL BE REFACTORED OUT
 GameObject::GameObject(const sf::Texture& texture, const sf::Vector2i& size)
     :   _size{ size }
 {
@@ -103,7 +141,6 @@ void GameObject::setHighlighted(bool h)
     {
         _highlight.setSize(sf::Vector2f{ 0.f, 0.f });
     }
-
 }
 
 void GameObject::setAnimated(bool v)

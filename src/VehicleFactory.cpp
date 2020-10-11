@@ -44,14 +44,14 @@ void VehicleFactory::loadVehicles(const nl::json& json)
     {
         VehicleInfo info;
 
-        info.size = item.value().at("size").get<sf::Vector2f>();
-        info.scale = item.value().at("scale").get<sf::Vector2f>();
         info.speed = item.value().at("speed").get<sf::Vector2f>();
 
         if (item.value().contains("damage"))
         {
             item.value().at("damage").get_to(info.damage);
         }
+
+        info.object = item.value().get<GameObjectInfo>();
 
         const auto soundname = fmt::format("sounds/{}.wav",
             item.value().at("horn").get<std::string>());
@@ -78,10 +78,9 @@ VehiclePtr VehicleFactory::createVehicle()
     static std::mt19937 gen(rd());
 
     auto vinfo = tt::select_randomly(_vehicles);
-    auto vehicle = std::make_shared<Vehicle>(*(vinfo->texture), sf::Vector2i{ vinfo->size }, _background);
+    auto vehicle = std::make_shared<Vehicle>(*vinfo, *(vinfo->texture), _background);
 
     vehicle->setHornSound(vinfo->sound);
-    vehicle->setScale(vinfo->scale);
 
     std::uniform_real_distribution<float> dis(vinfo->speed.x, vinfo->speed.y);
     vehicle->setSpeed(dis(gen));

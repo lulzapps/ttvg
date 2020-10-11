@@ -446,6 +446,14 @@
                 "name" : "car1",
                 "size": { "x": 77, "y": 41 },
                 "scale": { "x": 1.4, "y": 1.4 },
+                "count": 3,
+                "states":
+                [
+                    { "id": "down", "source": { "x": 0, "y": 0 } },
+                    { "id": "left", "source": { "x": 0, "y": 1 } },
+                    { "id": "right", "source": { "x": 0, "y": 2 } },
+                    { "id": "up", "source": { "x": 0, "y": 3 } }
+                ],
 
                 "speed": { "x": 8.0, "y": 20.0 },
                 "horn": "carhorn1",
@@ -455,6 +463,14 @@
                 "name" : "car2",
                 "size": { "x": 96, "y": 63 },
                 "scale": { "x": 1.0, "y": 1.0 },
+                "count": 3,
+                "states":
+                [
+                    { "id": "down", "source": { "x": 0, "y": 0 } },
+                    { "id": "left", "source": { "x": 0, "y": 1 } },
+                    { "id": "right", "source": { "x": 0, "y": 2 } },
+                    { "id": "up", "source": { "x": 0, "y": 3 } }
+                ],
 
                 "speed": { "x": 10.0, "y": 40.0 },
                 "horn": "carhorn2",
