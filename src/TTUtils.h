@@ -19,6 +19,7 @@ namespace sf
 
 void from_json(const nl::json& j, Vector2f& v);
 void from_json(const nl::json& j, Vector2i& v);
+void from_json(const nl::json& j, Vector2u& v);
 
 } // namespace sf
 

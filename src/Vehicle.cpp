@@ -84,11 +84,6 @@ Vehicle::Vehicle(const VehicleInfo& info, const sf::Texture& texture, Background
     : GameObject{ info.object, texture },
       _bg{ bg }
 {
-    if (info.object.scale.has_value())
-    {
-        setScale(*(info.object.scale));
-    }
-
     // TODO: this will probably be removed
     setSource(0, 0);
     setAnimated(true);
@@ -204,19 +199,31 @@ void Vehicle::setDirection(std::uint32_t dir)
         case NONE:
         case DOWN:
         default:
-            setSource(0, 0);
+        {
+            //setSource(0, 0);
+            setState("down");
+        }
         break;
 
         case UP:
-            setSource(0, 3);
+        {
+            //setSource(0, 3);
+            setState("up");
+        }
         break;
 
         case LEFT:
-            setSource(0, 1);
+        {
+            //setSource(0, 1);
+            setState("left");
+        }
         break;
 
         case RIGHT:
-            setSource(0, 2);
+        {
+            //setSource(0, 2);
+            setState("right");
+        }
         break;
     }
 }

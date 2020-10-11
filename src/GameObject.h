@@ -38,7 +38,7 @@ struct GameObjectInfo
     std::string     name;
     std::string     description;
 
-    std::optional<sf::Vector2i>     size;
+    std::optional<sf::Vector2u>     size;
     std::optional<sf::Vector2f>     scale;
     std::optional<std::uint32_t>    count;
 
@@ -59,6 +59,7 @@ public:
     // TO BE REFACTORED OUT
     void setSource(std::uint32_t x, std::uint32_t y);
     // END TO BE REFACTORED OUT
+    void setState(const std::string& statename);
     
     void setHighlighted(bool h);
     bool highlighted() const { return _highlight.getSize().x != 0; }
@@ -79,7 +80,7 @@ public: // signals
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
 
-    sf::Vector2i    _size; // fixed cell size of each frame within the sprite 
+    sf::Vector2u    _size; // fixed cell size of each frame within the sprite 
     sf::Clock       _timer;
 
     // some sprite sheets have different frames per row
