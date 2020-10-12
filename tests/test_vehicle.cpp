@@ -31,7 +31,15 @@ BOOST_AUTO_TEST_CASE(vehicleTurnTest)
     sf::Texture vtext;
     vtext.create(10, 10);
 
-    tt::Vehicle vehicle{ vtext, sf::Vector2i{10,10},  bg };
+    tt::VehicleInfo vinfo;
+    vinfo.size = sf::Vector2u{ 10,10 };
+    vinfo.states.emplace();
+    vinfo.states->emplace("up", GameObjectState{ "up", sf::Vector2i{0,0}, 1 });
+    vinfo.states->emplace("down", GameObjectState{ "down", sf::Vector2i{0,0}, 1 });
+    vinfo.states->emplace("left", GameObjectState{ "left", sf::Vector2i{0,0}, 1 });
+    vinfo.states->emplace("right", GameObjectState{ "right", sf::Vector2i{0,0}, 1 });
+
+    tt::Vehicle vehicle{ vinfo, vtext, bg };
     vehicle.setSpeed(4.0f);
 
     tt::Path path;
@@ -97,7 +105,15 @@ BOOST_AUTO_TEST_CASE(fastVehicleTest)
     sf::Texture vtext;
     vtext.create(10, 10);
 
-    tt::Vehicle vehicle{ vtext, sf::Vector2i{10,10},  bg };
+    tt::VehicleInfo vinfo;
+    vinfo.size = sf::Vector2u{ 10,10 };
+    vinfo.states.emplace();
+    vinfo.states->emplace("up", GameObjectState{ "up", sf::Vector2i{0,0}, 1 });
+    vinfo.states->emplace("down", GameObjectState{ "down", sf::Vector2i{0,0}, 1 });
+    vinfo.states->emplace("left", GameObjectState{ "left", sf::Vector2i{0,0}, 1 });
+    vinfo.states->emplace("right", GameObjectState{ "right", sf::Vector2i{0,0}, 1 });
+
+    tt::Vehicle vehicle{ vinfo, vtext, bg };
     vehicle.setSpeed(7.0f);
 
     tt::Path path;

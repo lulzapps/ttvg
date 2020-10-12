@@ -149,7 +149,10 @@ std::uint16_t GameObject::timestep()
             left = 0;
         }
 
-        setSource(left, top);
+        _source.x = left;
+        _source.y = top;
+        _sprite.setTextureRect(sf::IntRect(
+            _source.x * _size.x, _source.y * _size.y, _size.x, _size.y));
         
         onFrameChange();
 

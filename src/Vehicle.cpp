@@ -84,16 +84,7 @@ Vehicle::Vehicle(const VehicleInfo& info, const sf::Texture& texture, Background
     : GameObject{ info, texture },
       _bg{ bg }
 {
-    // TODO: this will probably be removed
-    setSource(0, 0);
-    setAnimated(true);
-}
-
-Vehicle::Vehicle(const sf::Texture& texture, const sf::Vector2i & size, BackgroundSharedPtr bg)
-    : GameObject(texture, size),
-      _bg { bg }
-{
-    setSource(0, 0);
+    setState("down");
     setAnimated(true);
 }
 

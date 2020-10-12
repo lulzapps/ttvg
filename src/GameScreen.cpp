@@ -37,7 +37,17 @@ GameScreen::GameScreen(ResourceManager& resmgr, sf::RenderTarget& target)
     auto textptr = _resources.cacheTexture("textures/tommy.png");
     assert(textptr);
     textptr->setSmooth(true);
-    _player = std::make_shared<Player>(*textptr, sf::Vector2i{ 64, 64 });
+
+    GameObjectInfo playerObjInfo;
+    playerObjInfo.size = sf::Vector2u{ 64, 64 };
+    playerObjInfo.count = 9;
+    playerObjInfo.states.emplace();
+    playerObjInfo.states->emplace("up", GameObjectState{ "up", sf::Vector2i{0,0}, 9 });
+    playerObjInfo.states->emplace("left", GameObjectState{ "left", sf::Vector2i{0,1}, 9 });
+    playerObjInfo.states->emplace("down", GameObjectState{ "down", sf::Vector2i{0,2}, 9 });
+    playerObjInfo.states->emplace("right", GameObjectState{ "right", sf::Vector2i{0,3}, 9 });
+
+    _player = std::make_shared<Player>(playerObjInfo, *textptr);
 
     SceneSetup setup{ _resources, _window, _player, _luaState, _itemFactory };
 

@@ -10,7 +10,7 @@
     {
         "start": { "x": 400, "y": 550 },
         "scale": { "x": 2.5, "y": 2.5 },
-        "source": { "x": 0, "y": 2 },
+        "state": "down",
         "origin": { "x": 0, "y": 0 },
         "stepsize" : 16.0
     },

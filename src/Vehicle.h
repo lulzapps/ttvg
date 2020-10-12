@@ -46,10 +46,6 @@ public:
 
     Vehicle(const VehicleInfo& info, const sf::Texture& texture, BackgroundSharedPtr bg);
 
-    // TODO: THIS CONSTRUCTOR WILL BE DELETED
-    Vehicle(const sf::Texture& texture, const sf::Vector2i& size, BackgroundSharedPtr bg);
-
-
     std::uint16_t timestep() override;
     bool isBlocked(const sf::FloatRect& point);
 

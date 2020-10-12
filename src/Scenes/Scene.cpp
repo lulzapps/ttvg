@@ -36,6 +36,11 @@ void from_json(const nl::json& j, AvatarInfo& av)
     {
         j.at("stepsize").get_to(av.stepsize);
     }
+
+    if (j.contains("state"))
+    {
+        j.at("state").get_to(av.state);
+    }
 }
 
 void from_json(const nl::json& j, CallbackInfo& cb)
@@ -334,9 +339,7 @@ void Scene::enter()
     _player->setScale(_playerAvatarInfo.scale);
     _player->setOrigin(_playerAvatarInfo.origin);
 
-    _player->setSource(
-        static_cast<std::uint32_t>(_playerAvatarInfo.source.x),
-        static_cast<std::uint32_t>(_playerAvatarInfo.source.y));
+    _player->setState(_playerAvatarInfo.state);
 
     _player->onMoveTimer.connect(
         [this]()
@@ -826,9 +829,7 @@ PollResult Scene::privatePollHandler(const sf::Event& e)
 
                 _player->setWalking(true);
                 _player->setAnimated(true);
-
-                // THIS WILL EVENTUALLY BE "SET STATE"
-                _player->setSource(0, 1);
+                _player->setState("left");
                 _player->setDirection(Direction::LEFT);
                 return { true, {} };
             }
@@ -843,8 +844,7 @@ PollResult Scene::privatePollHandler(const sf::Event& e)
 
                 _player->setWalking(true);
                 _player->setAnimated(true);
-
-                _player->setSource(0, 3);
+                _player->setState("right");
                 _player->setDirection(Direction::RIGHT);
                 return { true, {} };
             }
@@ -859,8 +859,7 @@ PollResult Scene::privatePollHandler(const sf::Event& e)
 
                 _player->setWalking(true);
                 _player->setAnimated(true);
-
-                _player->setSource(0, 0);
+                _player->setState("up");
                 _player->setDirection(Direction::UP);
                 return { true, {} };
             }
@@ -875,8 +874,7 @@ PollResult Scene::privatePollHandler(const sf::Event& e)
 
                 _player->setWalking(true);
                 _player->setAnimated(true);
-
-                _player->setSource(0, 2);
+                _player->setState("down");
                 _player->setDirection(Direction::DOWN);
                 return { true, {} };
             }

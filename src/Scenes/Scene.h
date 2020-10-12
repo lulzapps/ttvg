@@ -27,6 +27,7 @@ struct AvatarInfo
     sf::Vector2f    source;
     sf::Vector2f    origin;
     float           stepsize;
+    std::string     state;
 };
 
 struct CallbackInfo

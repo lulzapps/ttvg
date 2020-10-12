@@ -14,7 +14,7 @@
     {
         "start": { "x": 1660, "y": 2855 },
         "scale": { "x": 1.5, "y": 1.5 },
-        "source": { "x": 0, "y": 2 },
+        "state": "down",
         "origin": { "x": 0, "y": 0 },
         "stepsize" : 16.0
     },
