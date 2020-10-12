@@ -56,9 +56,6 @@ public:
     GameObject(const GameObjectInfo& info, const sf::Texture& texture);
     GameObject(const sf::Texture& texture, const sf::Vector2i& size);
 
-    // TO BE REFACTORED OUT
-    void setSource(std::uint32_t x, std::uint32_t y);
-    // END TO BE REFACTORED OUT
     void setState(const std::string& statename);
     
     void setHighlighted(bool h);

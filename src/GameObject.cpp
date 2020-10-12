@@ -117,14 +117,6 @@ GameObject::GameObject(const sf::Texture& texture, const sf::Vector2i& size)
     _highlight.setOutlineColor(sf::Color(255, 255, 255));
 }
 
-void GameObject::setSource(std::uint32_t x, std::uint32_t y)
-{
-    _source.x = x;
-    _source.y = y;
-    _sprite.setTextureRect(sf::IntRect(
-        _source.x * _size.x, _source.y * _size.y, _size.x, _size.y));
-}
-
 void GameObject::setState(const std::string& statename)
 {
     const auto& state = _states.at(statename);
